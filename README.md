@@ -14,18 +14,19 @@
 ---
 
 ## 💻 2. 실행 환경
-- **OS:** Windows 11 (PowerShell / WSL2)
-- **Terminal:** VSCode Terminal
+- **OS:** Windows 11 (PowerShell / WSL2 환경 혼용)
+- **Terminal:** VSCode Terminal(PowerShell)
 - **Docker Version:** Docker Desktop 27.2.0
 - **Git Version:** Git 2.45.2.windows.1
 
 ---
 
-## ✅ 3. 수행 항목 체크리스트
+## ✅ 3. 수행 항목 체크리스트 (실패 시 확인 항목 포함)
 - [x] 터미널 기본 조작 및 폴더 구성 (`pwd`, `ls`, `mkdir` 등)
 - [x] 파일 및 디렉토리 권한 변경 실습 (`chmod`)
 - [x] Docker 설치 및 데몬 동작 점검 (`docker --version`, `docker info`)
-- [x] 테스트 컨테이너 실행 (`hello-world`, `ubuntu`)
+- [x] 테스트 컨테이너 실행 (`hello-world`, `ubuntu`) — *실패 시 권한(Docker Desktop 구동 여부) 및 데몬 상태 재확인 필수*
+- [x] Dockerfile 작성 및 커스텀 웹 서버 이미지 빌드 (`docker build`)
 - [x] Dockerfile 작성 및 커스텀 웹 서버 이미지 빌드 (`docker build`)
 - [x] 포트 매핑 및 브라우저 접속 확인 (`-p 8080:80`)
 - [x] 바인드 마운트를 통한 실시간 소스 변경 반영 확인 (`-v`)
@@ -76,6 +77,7 @@ app/
   - **파일 유형별 권한 권장값:**
     - **스크립트 및 디렉토리 (755):** 실행(`x`) 권한이 필수적이므로 소유자에게 전체 권한, 그룹/기타 사용자에게 읽기 및 실행 권한을 부여합니다.
     - **일반 정적 파일 (644):** 보안을 위해 실행 권한을 제외하고, 소유자는 읽기/쓰기, 그룹/기타 사용자는 읽기 전용으로 제한합니다.
+  - **고급 권한 참고: 리눅스 환경에서는 프로세스 실행 시 권한이 임시 상승하는 suid, sgid, 공용 폴더 보호를 위한 sticky bit 개념이 존재합니다.
 
 ### 3) 포트 포워딩 (Port Forwarding) 및 네트워크 네임스페이스
 - **필요성:** Docker 컨테이너는 격리된 네트워크 네임스페이스(Virtual Network Interface)를 가지므로 외부(호스트 OS)에서 직접 접속할 수 없습니다.
@@ -89,6 +91,7 @@ app/
     # 또는
     ss -tulpn | grep 8080
     ```
+    
 
 ### 4) 이미지 vs 컨테이너 vs 빌드·실행·저장
 - **이미지 (Image):** 컨테이너를 실행하기 위한 모든 파일과 설정이 포함된 읽기 전용(Read-Only) 템플릿/실행 파일 스냅샷.
