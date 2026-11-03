@@ -1,0 +1,5 @@
+.env
+.git
+*.key
+id_ed25519
+README.md

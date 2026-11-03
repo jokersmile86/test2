@@ -1,0 +1,20 @@
+services:
+  # 웹 서버 서비스 (NGINX)
+  web:
+    build: .                          # 현재 디렉토리의 Dockerfile을 기반으로 빌드
+    container_name: my_web_server     # 컨테이너 이름 지정
+    ports:
+      - "${HOST_PORT:-8080}:80"       # .env 파일의 HOST_PORT 사용 (기본값: 8080)
+    volumes:
+      - ./app:/usr/share/nginx/html   # 실시간 소스코드 변경 반영을 위한 바인드 마운트
+    environment:
+      - APP_ENV=development
+    depends_on:
+      - cache                         # cache 서비스가 먼저 실행된 후 web 실행
+
+  # 보조 서비스 (Redis 캐시)
+  cache:
+    image: redis:alpine
+    container_name: my_cache_server
+    ports:
+      - "6379:6379"
