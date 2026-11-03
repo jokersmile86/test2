@@ -82,6 +82,12 @@ docker run --rm -v my_work_vol:/data ubuntu cat /data/memo.txt
 
 ---
 
-## 💡 7. 배운 점
+## 💡 배운 점
 - COPY(복사본)와 바인드 마운트(실시간 연결)의 차이를 직접 실험으로 이해함.
 - Docker를 활용해 환경에 구애받지 않는 재현 가능한 웹 서버 실행 환경을 구축하는 방법을 체득함.
+
+### Docker 빌드 결과
+![docker build 성공](images/build.png)
+
+### 브라우저 접속 결과
+![브라우저 접속](images/browser.png)
